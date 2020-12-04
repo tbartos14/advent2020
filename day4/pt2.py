@@ -29,15 +29,11 @@ print(len(split_str))
 for passport in split_str:
     flattened = " ".join(passport.split("\n"))
     kv_pair = list(map(lambda x: x.split(":"), flattened.split(" ")))
-    # print(kv_pair)
     passport_dict = dict(kv_pair)
     if len(needed_fields.intersection(set(passport_dict.keys()))) == 7:
         if all([bool(re.match(value, passport_dict[key])) for key, value in re_validation.items()]):
             valid_passports += 1
             if "cid" in passport_dict.keys():
                 passport_dict.pop("cid")
-            print(sorted(passport_dict.items()))
-            print([bool(re.match(value, passport_dict[key])) for key, value in re_validation.items()])
-        # else:
-            # print(passport_dict)
+
 print(f"Number of valid passports: {valid_passports}")
